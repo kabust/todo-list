@@ -9,27 +9,28 @@ from core.views import (
     TagListView,
     TagCreateView,
     TagUpdateView,
-    TagDeleteView,
+    TagDeleteView, home_redirect,
 )
 
 urlpatterns = [
-    path("", TaskListView.as_view(), name="index"),
-    path("new-todo/", TaskCreateView.as_view(), name="todo-create"),
+    path("", home_redirect, name="home"),
+    path("tasks/", TaskListView.as_view(), name="task-list"),
+    path("tasks/create", TaskCreateView.as_view(), name="task-create"),
     path(
-        "update-todo/<int:pk>/", TaskUpdateView.as_view(), name="todo-update"
+        "tasks/<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"
     ),
     path(
-        "delete-todo/<int:pk>/", TaskDeleteView.as_view(), name="todo-delete"
+        "tasks/<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"
     ),
     path(
-        "<int:pk>/toggle-complete/",
+        "tasks/<int:pk>/toggle-complete/",
         toggle_complete_todo,
         name="toggle-complete"
     ),
     path("tags/", TagListView.as_view(), name="tag-list"),
-    path("tags/add/", TagCreateView.as_view(), name="tag-create"),
-    path("tags/update/<int:pk>", TagUpdateView.as_view(), name="tag-update"),
-    path("tags/delete/<int:pk>", TagDeleteView.as_view(), name="tag-delete"),
+    path("tags/create/", TagCreateView.as_view(), name="tag-create"),
+    path("tags/<int:pk>/update/", TagUpdateView.as_view(), name="tag-update"),
+    path("tags/<int:pk>/delete/", TagDeleteView.as_view(), name="tag-delete"),
 ]
 
 app_name = "core"

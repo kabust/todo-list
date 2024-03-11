@@ -7,6 +7,9 @@ from core.forms import TaskForm, TaskSearchForm
 from core.models import Task, Tag
 
 
+def home_redirect(request: HttpRequest) -> HttpResponseRedirect:
+    return HttpResponseRedirect(reverse("core:task-list"))
+
 class TaskListView(generic.ListView):
     model = Task
 
@@ -29,18 +32,18 @@ class TaskListView(generic.ListView):
 class TaskCreateView(generic.CreateView):
     model = Task
     form_class = TaskForm
-    success_url = reverse_lazy("core:index")
+    success_url = reverse_lazy("core:task-list")
 
 
 class TaskUpdateView(generic.UpdateView):
     model = Task
     form_class = TaskForm
-    success_url = reverse_lazy("core:index")
+    success_url = reverse_lazy("core:task-list")
 
 
 class TaskDeleteView(generic.DeleteView):
     model = Task
-    success_url = reverse_lazy("core:index")
+    success_url = reverse_lazy("core:task-list")
 
 
 def toggle_complete_todo(
@@ -52,7 +55,7 @@ def toggle_complete_todo(
     task.is_done = not task.is_done
     task.save()
 
-    return HttpResponseRedirect(reverse("core:index"))
+    return HttpResponseRedirect(reverse("core:task-list"))
 
 
 class TagListView(generic.ListView):

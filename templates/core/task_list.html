@@ -4,7 +4,7 @@
 {% block content %}
   <h1>
     TODO List
-    <a href="{% url "core:todo-create" %}" class="btn btn-primary" style="float: right">Add task</a>
+    <a href="{% url "core:task-create" %}" class="btn btn-primary" style="float: right">Add task</a>
   </h1>
   <br>
   <form method="get" action="">
@@ -38,8 +38,8 @@
         {% for tag in task.tags.all %}
           #{{ tag }}
         {% endfor %}
-        <a href="{% url "core:todo-update" task.id %}">Update</a>
-        <a href="{% url "core:todo-delete" task.id %}" style="color: red">Delete</a>
+        <a href="{% url "core:task-update" task.id %}">Update</a>
+        <a href="{% url "core:task-delete" task.id %}" style="color: red">Delete</a>
         </p>
         <hr>
       </div>
