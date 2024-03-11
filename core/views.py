@@ -1,5 +1,5 @@
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpRequest, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
@@ -26,7 +26,6 @@ class TaskListView(generic.ListView):
         return context
 
 
-
 class TaskCreateView(generic.CreateView):
     model = Task
     form_class = TaskForm
@@ -44,7 +43,10 @@ class TaskDeleteView(generic.DeleteView):
     success_url = reverse_lazy("core:index")
 
 
-def toggle_complete_todo(request: HttpRequest, pk: int) -> HttpResponseRedirect:
+def toggle_complete_todo(
+        request: HttpRequest,
+        pk: int
+) -> HttpResponseRedirect:
     task = get_object_or_404(Task, pk=pk)
 
     task.is_done = not task.is_done

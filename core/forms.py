@@ -5,8 +5,7 @@ from core.models import Task, Tag
 
 class TaskForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(
-        queryset=Tag.objects.all(),
-        widget=forms.CheckboxSelectMultiple()
+        queryset=Tag.objects.all(), widget=forms.CheckboxSelectMultiple()
     )
     deadline = forms.DateTimeField(
         widget=forms.DateTimeInput(attrs={"type": "datetime-local"}),
@@ -15,7 +14,11 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ["content", "deadline", "tags",]
+        fields = [
+            "content",
+            "deadline",
+            "tags",
+        ]
 
 
 class TaskSearchForm(forms.Form):
